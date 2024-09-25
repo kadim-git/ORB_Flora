@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}
+  {{ species }}
+  family, genus, species
+{% endblock %}
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'flora:families' %}">Families</a></li>
+    {% comment %} <li class="breadcrumb-item"><a href="/flora/Athyriáceae Alston/102/">Family: {{ family }}</a></li> {% endcomment %}
+{% comment %} x      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family pk %}">Family: {{ family }}</a></li> {% endcomment %}
+
+    <li class="breadcrumb-item"><a href="{% url 'flora:genera' family %}">{{ family }}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'flora:species' family genus %}">{{ genus }}</a></li>
+    
+    <li class="breadcrumb-item"><a href="#">{{ species.name_short }}</a></li>
+  </ol>
+</nav>
+
+  <h1>{{ species.name_full }}</h1>
+  <h3>Семейство: {{ family }}, род {{ genus }}</h3>
+  <h4>Описание:</h4>
+  <p> {{ species.description }}</p><hr>
+  <h4>Распространение:</h4>
+  <p> {{ species.distribution }}</p><hr>
+  <h4>Среда обитания:</h4>
+  <p> {{ species.habitat }}</p><hr>
+  <h4>Достоверность встречаемости по районам (карта):</h4>
+  <ul>
+  {% for item in reliability_list %}
+    <li>
+    {{ item.district_id }}, ( {{ item.district_id.pk }} ) &mdash; {{ item.reliability }}
+    </li>
+    {% endfor %}
+  </ul>
+  <hr>
+  <h4>Места встреч (карта):</h4>
+  <ul>
+    {% for item in location_list %}
+    <li>
+      <b>Дата наблюдения:</b> {{ item.observation_date }}, 
+      <b>Источник:</b> {{ item.source_type }}, 
+  <b>Данные источника:</b> {{ item.source_info }}
+  <br>
+  <b>Координаты: с.широта: {{ item.coordinate_lat_n }} , в.долгота: {{ item.coordinate_long_e }} </b>,  
+  <br>
+  <b>Дополнительно:</b> {{ item.description }}
+  <hr>
+    </li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+ 

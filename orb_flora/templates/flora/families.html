@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+  Семейства
+{% endblock %}
+{% block content %}
+  <h1>Семейста растений</h1>
+  <hr>
+  <h2>Алфавитный список семейств растений бассейна реки Ока</h2>
+  <ul>
+    {% for family in families_list %}
+      <li><h5>
+        <a href="{% url 'flora:genera' family.name %}"> 
+        {{ family.name_full }} </a> &mdash;  
+        {{ family.name_ru|truncatewords:10 }}, Индекс: {{ family.index }}
+      </h5>
+      </li>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock %}
+<!-- <a href="{% url 'flora:family' ice_cream.id %}">подробнее</a>
+-->

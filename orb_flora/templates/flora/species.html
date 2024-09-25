@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}
+  Список видов
+{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'flora:families' %}">Families</a></li>
+      {% comment %} <li class="breadcrumb-item"><a href="/flora/Athyriáceae Alston/102/">Family: {{ family }}</a></li> {% endcomment %}
+{% comment %} x      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family pk %}">Family: {{ family }}</a></li> {% endcomment %}
+
+      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family %}">{{ family }}</a></li>
+      
+      <li class="breadcrumb-item"><a href="#">{{ genus }}</a></li>
+    </ol>
+  </nav>
+  
+  <h1>Род {{ genus_full }} семейста {{ family }} </h1>
+  <hr>
+  <h4>Описание рода:</h4>
+  <p>{{ genus.description }}</p>
+  <hr>
+  <h4>Распространение рода:</h4>
+  <p>{{ genus.distribution }}</p>
+  <hr>
+  
+  <h2>Алфавитный список видов рода {{ genus.name }} </h2>
+  
+  <ul>
+    {% for species in species_list %}
+      <li>
+        <h5><a href="{% url 'flora:species_detail' family genus species.name_short %}">
+        {{ species.name_full }}</a> &mdash;
+        {{ species.name_rus|truncatewords:10 }}, Индекс: {{ species.pk }}</h5>
+      </li>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock %}
+<!-- <a href="{% url 'flora:family' ice_cream.id %}">подробнее</a>
+-->
