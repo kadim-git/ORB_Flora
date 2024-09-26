@@ -25,7 +25,10 @@ SECRET_KEY = "django-insecure-qg0owcebj5$pl6kj^vwqi0a)li6s-&k#t@3(w^=p6_-f=rrq41
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'orbflora.pythonanywhere.com',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -124,6 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+#STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static_dev',
