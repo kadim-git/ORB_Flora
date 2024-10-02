@@ -15,11 +15,11 @@
         <span class="navbar-toggler-icon"></span>
       </div>
       <div class="collapse navbar-collapse" id="navbarNav">
-        {% with request.resolver_match.view_name as view_name %}            
+        {% with request.resolver_match.view_name|slice:":3" as view_name %}            
         <ul class="nav nav-pills">
           <li class="nav-item">              
             <a
-              class="nav-link {% if view_name == 'homepage:index' %} active {% endif %}" 
+              class="nav-link {% if view_name == 'hom' %} active {% endif %}" 
               href="{% url 'homepage:index' %}"
               >
               О проекте 
@@ -28,7 +28,7 @@
           <li class="nav-item">
             <a 
               class="nav-link 
-              {% if view_name == 'flora:families' or view_name == 'flora:genera' or view_name == 'flora:species' or view_name == 'flora:species_detail' %} active {% endif %}" 
+              {% if view_name == 'flo' %} active {% endif %}" 
               href="{% url 'flora:families' %}"
               >
               Флора
@@ -36,7 +36,7 @@
           </li>
           <li class="nav-item">
             <a 
-              class="nav-link {% if view_name == 'oka_basin:regions' %} active {% endif %}"
+              class="nav-link {% if view_name == 'oka' %} active {% endif %}"
               href="{% url 'oka_basin:regions' %}"
             >
             Бассейн Оки

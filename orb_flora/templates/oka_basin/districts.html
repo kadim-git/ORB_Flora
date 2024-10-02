@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}
+  Список районов
+{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'oka_basin:regions' %}">Области</a></li>
+      {% comment %} <li class="breadcrumb-item"><a href="/flora/Athyriáceae Alston/102/">Family: {{ family }}</a></li> {% endcomment %}
+{% comment %} x      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family pk %}">Family: {{ family }}</a></li> 
+{% endcomment %}
+
+      <li class="breadcrumb-item"><a href="#">{{ region.name }}</a></li>
+      
+    </ol>
+  </nav>
+  
+  <h1>Область {{ region.name }} &mdash; {{ region.name_en }} </h1>
+  <hr>
+  <h4>Описание области:</h4>
+  <p>{{ region.description }}</p>
+  <hr>
+  
+  <h2>Алфавитный список районов:  </h2>
+  <ul>
+    {% for district in district_list %}
+      <li>
+        <h5><a href="{% url 'oka_basin:species' region.name district.name %}">  {% comment %}"{% url 'flora:species' family  genus.name %}">  
+          {% endcomment %}
+        {{ district.id }} &dash; {{ district.name }}, 
+      </a> ( {{ district.name_en }} )
+       </h5>
+      </li>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock %}
+<!-- <a href="{% url 'flora:family' ice_cream.id %}">подробнее</a>
+-->

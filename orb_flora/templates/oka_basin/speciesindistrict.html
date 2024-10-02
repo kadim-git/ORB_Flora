@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}
+  Список видов района {{ district.name }}
+{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'oka_basin:regions' %}">Области</a></li>
+      {% comment %} <li class="breadcrumb-item"><a href="/flora/Athyriáceae Alston/102/">Family: {{ family }}</a></li> {% endcomment %}
+{% comment %} x      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family pk %}">Family: {{ family }}</a></li> {% endcomment %}
+
+      <li class="breadcrumb-item"><a href="{% url 'oka_basin:districts' region.name %}">{{ region.name }}</a></li>
+      
+      <li class="breadcrumb-item"><a href="#">{{ district.name }}</a></li>
+    </ol>
+  </nav>
+  
+  <h1>Область: {{ region.name }}, район: {{ district.name }} </h1>
+  <hr>
+  <h4>Описание района:</h4>
+  <p>{{ district.description }}</p>
+  <hr>
+  
+  <h2>Алфавитный список видов, отмеченных в районе {{ district.name }} </h2>
+  
+  <ul>
+    {% for reliability in reliability_list %}
+      <li>
+        <h5><a href="
+          
+          {% url 'flora:species_detail' reliability.species_id.genus.family reliability.species_id.genus reliability.species_id.name_short %}
+          ">
+
+        {{ reliability.species_id.name_full }}</a> &mdash;
+        {{ reliability.species_id.name_ru }}, достоверность: {{ reliability.reliability }}</h5>
+      </li>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock %}
+<!-- <a href="{% url 'flora:family' ice_cream.id %}">подробнее</a>
+-->

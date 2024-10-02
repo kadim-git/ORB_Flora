@@ -13,7 +13,6 @@ class Region(models.Model):
     def __str__(self):
         return self.name
 
-
 class District(models.Model):
     id = models.IntegerField(primary_key=True)
     region_id = models.ForeignKey(Region, verbose_name="region_name", on_delete=models.CASCADE)
