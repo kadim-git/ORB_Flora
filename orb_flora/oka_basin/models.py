@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 from django.contrib import admin
 
@@ -8,7 +9,8 @@ class Region(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name='Название региона' )
     description = models.TextField(blank=True, default='', verbose_name='Описание')
     name_en = models.SlugField(blank=True, verbose_name='Название на английском')
-    
+    svg_path = models.TextField(blank=True, default='', verbose_name='Границы области, SVG path')
+
     #@admin.display(ordering="name")
     def __str__(self):
         return self.name
