@@ -19,17 +19,20 @@
 
   <h1>{{ species.name_full }}</h1>
   <h3>Семейство: {{ family }}, название:  {{ species.name_ru }}</h3>
+  <h5>Рабочий статус: {{ species.get_work_status_display }}</h5>
+  
+  
   <h4>Описание:</h4>
   <p> {{ species.description }}</p><hr>
   <h4>Распространение:</h4>
   <p> {{ species.distribution }}</p><hr>
-  <h4>Среда обитания:</h4>
+  <h4>Места обитания:</h4>
   <p> {{ species.habitat }}</p><hr>
   <h4>Достоверность встречаемости по районам (карта):</h4>
   <ul>
   {% for item in reliability_list %}
     <li>
-    {{ item.district_id }}, ( {{ item.district_id.pk }} ) &mdash; {{ item.reliability }}
+    {{ item.district_id }}, ( {{ item.district_id.pk }} ) &mdash; {{ item.get_reliability_display }}
     </li>
     {% endfor %}
   </ul>

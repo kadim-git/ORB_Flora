@@ -1,8 +1,11 @@
-{% extends "base.html" %}
-{% block title %}
-  Список районов
+{% extends "oka_basin/oka_basin_maps.html" %}
+
+{% block oka_bassin_title %}
+{{ region.name }} область, районы
 {% endblock %}
-{% block content %}
+
+{% block oka_bassin_content %}
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'oka_basin:regions' %}">Области</a></li>
@@ -39,3 +42,13 @@
 {% endblock %}
 <!-- <a href="{% url 'flora:family' ice_cream.id %}">подробнее</a>
 -->
+{% block region_borders %}
+
+<g>
+  <title>{{ region.name }} область</title>
+  <a href="{% url 'oka_basin:districts' region.name %}">    
+      <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
+  </a>
+</g>
+
+{% endblock %}

@@ -8,9 +8,6 @@ from django.http import HttpResponse
 from .models import Region
 from .models import District
 
-def regions(request):
-    template = 'oka_basin/description.html'
-    return render(request, template)
 
 class RegionListView(ListView):
     template_name = 'oka_basin/regions.html'
