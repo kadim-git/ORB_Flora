@@ -26,13 +26,12 @@
   <ul>
     {% for reliability in reliability_list %}
       <li>
-        <h5><a href="
-          
+        <h5><a href="          
           {% url 'flora:species_detail' reliability.species_id.genus.family reliability.species_id.genus reliability.species_id.name_short %}
           ">
 
         {{ reliability.species_id.name_full }}</a> &mdash;
-        {{ reliability.species_id.name_ru }}, достоверность: {{ reliability.reliability }}</h5>
+        {{ reliability.species_id.name_ru }}, достоверность: {{ reliability.get_reliability_display }}</h5>
       </li>
       {% if not forloop.last %}
         <hr>

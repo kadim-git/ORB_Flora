@@ -8,9 +8,7 @@
 
 <h1>Области бассейна реки Ока</h1>
 
-  <hr>
   <div class='container-regions'>
-  <h2>Cписок областей бассейна реки Ока</h2>
   <ul>
     {% for region in region_list %}
       <li><h5>
@@ -34,12 +32,12 @@
 {% block region_borders %}
 
     {% for region in region_list %}
-<g>
-  <title>{{ region.name }} область</title>
-  <a href="{% url 'oka_basin:districts' region.name %}">    
-      <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
-  </a>
-</g>
-{% endfor %}  
+    <g>
+    <title>{{ region.name }} область</title>
+    <a href="{% url 'oka_basin:districts' region.name %}">    
+        <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
+    </a>
+    </g>
+    {% endfor %}  
 
 {% endblock %}

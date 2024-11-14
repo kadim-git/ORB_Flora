@@ -21,8 +21,7 @@ class District(models.Model):
     name = models.CharField(max_length=30, unique=True, )
     description = models.TextField(blank=True, default='')
     name_en = models.SlugField(blank=True, verbose_name='Name in English')
-    
+    svg_path = models.TextField(blank=True, default='', verbose_name='Границы района, SVG path')
+
     def __str__(self):
         return self.name
-    
-   

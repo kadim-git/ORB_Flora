@@ -46,9 +46,17 @@
 
 <g>
   <title>{{ region.name }} область</title>
-  <a href="{% url 'oka_basin:districts' region.name %}">    
       <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
-  </a>
+
+  {% for district in district_list %}
+    <g>
+    <title>{{ district.name }} район</title>
+    <a href="{% url 'oka_basin:species' region.name district.name %}">    
+        <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ district.svg_path }} "/>
+    </a>
+    </g>
+    {% endfor %}  
+
 </g>
 
 {% endblock %}
