@@ -32,7 +32,7 @@
 {% block region_borders %}
 
     {% for region in region_list %}
-    <g>
+    <g opacity='1.0'>
     <title>{{ region.name }} область</title>
     <a href="{% url 'oka_basin:districts' region.name %}">    
         <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
