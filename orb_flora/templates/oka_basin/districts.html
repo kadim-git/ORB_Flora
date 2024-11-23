@@ -1,23 +1,20 @@
-{% extends "oka_basin/oka_basin_maps.html" %}
+{% extends "base.html" %}
 
-{% block oka_bassin_title %}
+{% block title %}
 {{ region.name }} область, районы
 {% endblock %}
 
-{% block oka_bassin_content %}
-
+{% block breadcrumb %}
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'oka_basin:regions' %}">Области</a></li>
-      {% comment %} <li class="breadcrumb-item"><a href="/flora/Athyriáceae Alston/102/">Family: {{ family }}</a></li> {% endcomment %}
-{% comment %} x      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family pk %}">Family: {{ family }}</a></li> 
-{% endcomment %}
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'oka_basin:regions' %}">Области</a></li>
+    <li class="breadcrumb-item"><a href="#">{{ region.name }}</a></li>    
+  </ol>
+</nav>
+{% endblock %}
 
-      <li class="breadcrumb-item"><a href="#">{{ region.name }}</a></li>
-      
-    </ol>
-  </nav>
-  
+
+{% block content %}
   <h1>{{ region.name }} область  ({{ region.name_en }} region) </h1>
   <hr>
   <h4>Описание области:</h4>
@@ -40,23 +37,43 @@
     {% endfor %}
   </ul>
 {% endblock %}
-<!-- <a href="{% url 'flora:family' ice_cream.id %}">подробнее</a>
--->
-{% block region_borders %}
+
+
+{% block maps %}
+  {% include "includes/maps_open.html" %}
+    {% block region_borders %}
 
 <g>
   <title>{{ region.name }} область</title>
-      <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
+      <path 
+      stroke-linecap="square" fill="#ffffff" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+      vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
+</g>
+      {% for region in region_list %}
+        <g>
+        <title>{{ region.name }} область</title>
+        <a href="{% url 'oka_basin:districts' region.name %}">    
+            <path 
+            stroke-linecap="square" fill="#ffffff" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+            vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
+        </a>
+        </g>
+        {% endfor %}  
+
 
   {% for district in district_list %}
     <g>
     <title>{{ district.name }} район</title>
     <a href="{% url 'oka_basin:species' region.name district.name %}">    
-        <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ district.svg_path }} "/>
+        <path
+        stroke-linecap="square" fill="#ffffff" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+        vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ district.svg_path }} "/>
     </a>
     </g>
     {% endfor %}  
 
 </g>
-
+  {% endblock %}
+{% include "includes/maps_close.html" %}
+  
 {% endblock %}

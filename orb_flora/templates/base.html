@@ -15,8 +15,13 @@
     {% include "includes/header.html" %}
     <main class="pt-5 my-5">
       <div class="container">
-        
+      
+      {% block breadcrumb %}{% endblock %}  
+
       {% block content %}{% endblock %}
+
+      {% block maps %}{% endblock %}
+      
       </div>
     </main>
     {% include "includes/footer.html" %}   

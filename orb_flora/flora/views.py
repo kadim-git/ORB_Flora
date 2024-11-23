@@ -23,7 +23,6 @@ def species_detail(request, family, genus, species):
                 "location_list": location_list}
     return render(request, template, context)
 
-
 def families(request):
     template = 'flora/families.html'
     
