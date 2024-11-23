@@ -2,20 +2,21 @@
 {% block title %}
   {{ species }}
 {% endblock %}
+
+{% block breadcrumb %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'flora:families' %}">Families</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family %}">{{ family }}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'flora:species' family genus %}">{{ genus }}</a></li>
+      <li class="breadcrumb-item"><a href="#">{{ species.name_short }}</a></li>
+    </ol>
+  </nav>
+
+{% endblock %}
+
 {% block content %}
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'flora:families' %}">Families</a></li>
-    {% comment %} <li class="breadcrumb-item"><a href="/flora/Athyriáceae Alston/102/">Family: {{ family }}</a></li> {% endcomment %}
-{% comment %} x      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family pk %}">Family: {{ family }}</a></li> {% endcomment %}
-
-    <li class="breadcrumb-item"><a href="{% url 'flora:genera' family %}">{{ family }}</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'flora:species' family genus %}">{{ genus }}</a></li>
-    
-    <li class="breadcrumb-item"><a href="#">{{ species.name_short }}</a></li>
-  </ol>
-</nav>
 
   <h1>{{ species.name_full }}</h1>
   <h3>Семейство: {{ family }}, название:  {{ species.name_ru }}</h3>
@@ -25,14 +26,39 @@
   <h4>Описание:</h4>
   <p> {{ species.description }}</p><hr>
   <h4>Распространение:</h4>
-  <p> {{ species.distribution }}</p><hr>
+  <p> {{ species.distribution_str }}</p><hr>
   <h4>Места обитания:</h4>
   <p> {{ species.habitat }}</p><hr>
   <h4>Достоверность встречаемости по районам (карта):</h4>
+  {% endblock %}
+
+  {% block maps %}
+  {% include "includes/maps_open.html" %}
+    {% block region_borders %}
+     
+
+
+{% for item in reliability_list %}
+<g>
+    <title>{{ item.district_id.name }} район</title>
+    <a href="{% url 'oka_basin:species' item.district_id.region_id.name item.district_id.name %}">    
+        <path
+        stroke-linecap="square" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+        vector-effect="none" fill="{{ item.get_reliability_color }}" fill-rule="evenodd" d=" {{ item.district_id.svg_path }}  "/>
+    </a>
+    </g>
+    {% endfor %}  
+
+</g>
+  {% endblock %}
+{% include "includes/maps_close.html" %}
+
+<hr>
   <ul>
   {% for item in reliability_list %}
     <li>
-    {{ item.district_id }}, ( {{ item.district_id.pk }} ) &mdash; {{ item.get_reliability_display }}
+    {{ item.district_id }}, ( {{ item.district_id.pk }} ) &mdash; {{ item.get_reliability_display }},
+    
     </li>
     {% endfor %}
   </ul>

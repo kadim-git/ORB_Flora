@@ -25,6 +25,8 @@ class DistrictListView(ListView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         context["region"] = self.region
+        context["region_list"] = Region.objects.all()
+        tt=5
         return context
 
 from flora.models import Reliability    

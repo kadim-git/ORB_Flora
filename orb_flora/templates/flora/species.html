@@ -2,18 +2,20 @@
 {% block title %}
   Список видов
 {% endblock %}
-{% block content %}
-<nav aria-label="breadcrumb">
+
+
+{% block breadcrumb %}
+  <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'flora:families' %}">Families</a></li>
-      {% comment %} <li class="breadcrumb-item"><a href="/flora/Athyriáceae Alston/102/">Family: {{ family }}</a></li> {% endcomment %}
-{% comment %} x      <li class="breadcrumb-item"><a href="{% url 'flora:genera' family pk %}">Family: {{ family }}</a></li> {% endcomment %}
-
       <li class="breadcrumb-item"><a href="{% url 'flora:genera' family %}">{{ family }}</a></li>
-      
       <li class="breadcrumb-item"><a href="#">{{ genus }}</a></li>
     </ol>
   </nav>
+{% endblock %}
+
+
+{% block content %}
   
   <h1>Род {{ genus_full }} семейста {{ family }} </h1>
   <hr>

@@ -52,6 +52,9 @@ class Species(models.Model):
         (2, "завершен"),
         ]
     work_status = models.IntegerField(choices=WORK_STATUS, default=0, verbose_name="Рабочий статус")
+    
+    def distribution_str(self):
+        return self.distribution + " TODO for citation !"
 
     file_reliability = models.FileField(null=True, blank=True,)
 
@@ -126,6 +129,10 @@ class Reliability(models.Model): #Reliability of Distribution in the district
     species_id = models.ForeignKey(Species, verbose_name="species name", on_delete=models.CASCADE)
     district_id = models.ForeignKey(District, verbose_name="district name", on_delete=models.CASCADE,  default=1 )
     reliability = models.IntegerField(choices=RELIABILITY_STATUS, default=0)
+
+    def get_reliability_color(self):
+        color_list = ['white','ligthgray','gray','yellow','lightgreen','green']
+        return color_list[self.reliability]
 
 
 class Location(models.Model):

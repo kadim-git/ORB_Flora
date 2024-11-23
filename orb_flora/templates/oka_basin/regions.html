@@ -1,10 +1,18 @@
-{% extends "oka_basin/oka_basin_maps.html" %}
+{% extends "base.html" %}
 
-{% block oka_bassin_title %}
-  Области!
+{% block title %}
+  Области
 {% endblock %}
 
-{% block oka_bassin_content %}
+{% block breadcrumb %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'oka_basin:regions' %}">Области</a></li>  
+    </ol>
+  </nav>
+{% endblock %}
+
+{% block content %}
 
 <h1>Области бассейна реки Ока</h1>
 
@@ -28,16 +36,22 @@
 </div>
 {% endblock %}
 
+{% block maps %}
+  {% include "includes/maps_open.html" %}
+    {% block region_borders %}
 
-{% block region_borders %}
+        {% for region in region_list %}
+        <g>
+        <title>{{ region.name }} область</title>
+        <a href="{% url 'oka_basin:districts' region.name %}">    
+            <path 
+            stroke-linecap="square" fill="#ffffff" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+            vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
+        </a>
+        </g>
+        {% endfor %}  
 
-    {% for region in region_list %}
-    <g opacity='1.0'>
-    <title>{{ region.name }} область</title>
-    <a href="{% url 'oka_basin:districts' region.name %}">    
-        <path vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
-    </a>
-    </g>
-    {% endfor %}  
-
+    {% endblock %}
+  {% include "includes/maps_close.html" %}
+  
 {% endblock %}
