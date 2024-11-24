@@ -24,12 +24,11 @@
         {%comment%}
           <a href="{% url 'oka_basin:regions' region.id %}"> 
           {%endcomment%}
-        {{ region.id }}  &dash;  
-        {{ region.name }} </a>
+         {{ region.name }} ({{ region.id }}) </a>
       </h5>
       </li>
       {% if not forloop.last %}
-        <hr>
+        
       {% endif %}
     {% endfor %}
   </ul>

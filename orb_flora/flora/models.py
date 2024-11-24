@@ -33,7 +33,7 @@ class Genus(models.Model):
     def __str__(self):
         return self.name
 
-
+from django.urls import reverse
 class Species(models.Model):
     genus = models.ForeignKey(Genus, on_delete=models.CASCADE)
     index = models.IntegerField(verbose_name='Интекс по Маевскому', null=True, blank=True)
@@ -53,8 +53,10 @@ class Species(models.Model):
         ]
     work_status = models.IntegerField(choices=WORK_STATUS, default=0, verbose_name="Рабочий статус")
     
+    
     def distribution_str(self):
-        return self.distribution + " TODO for citation !"
+        citation_link = f"<a href={reverse('flora:families')}>Флора </a>"
+        return self.distribution + " TODO for citation ! " + citation_link
 
     file_reliability = models.FileField(null=True, blank=True,)
 
@@ -122,9 +124,9 @@ class Reliability(models.Model): #Reliability of Distribution in the district
         (0, "не отмечен"),
         (1, "наблюдение до 1961г"),
         (2, "наблюдение после 1960г"),
-        ( 3, "Гербарий до 1961г"),
-        ( 4, "Гербарий до 1961г и наблюдение после 1960г"),
-        ( 5, "Гербарий после 1960г"),
+        ( 3, "гербарий до 1961г"),
+        ( 4, "гербарий до 1961г и наблюдение после 1960г"),
+        ( 5, "гербарий после 1960г"),
     ]
     species_id = models.ForeignKey(Species, verbose_name="species name", on_delete=models.CASCADE)
     district_id = models.ForeignKey(District, verbose_name="district name", on_delete=models.CASCADE,  default=1 )

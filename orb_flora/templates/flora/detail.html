@@ -26,7 +26,7 @@
   <h4>Описание:</h4>
   <p> {{ species.description }}</p><hr>
   <h4>Распространение:</h4>
-  <p> {{ species.distribution_str }}</p><hr>
+  <p> {{ species.distribution_str|safe }}</p><hr>
   <h4>Места обитания:</h4>
   <p> {{ species.habitat }}</p><hr>
   <h4>Достоверность встречаемости по районам (карта):</h4>
@@ -40,7 +40,7 @@
 
 {% for item in reliability_list %}
 <g>
-    <title>{{ item.district_id.name }} район</title>
+    <title>{{ item.district_id.name }} &mdash; {{ item.get_reliability_display }} </title>
     <a href="{% url 'oka_basin:species' item.district_id.region_id.name item.district_id.name %}">    
         <path
         stroke-linecap="square" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
@@ -57,7 +57,7 @@
   <ul>
   {% for item in reliability_list %}
     <li>
-    {{ item.district_id }}, ( {{ item.district_id.pk }} ) &mdash; {{ item.get_reliability_display }},
+    {{ item.district_id }} ( {{ item.district_id.pk }} ) &mdash; {{ item.get_reliability_display }},
     
     </li>
     {% endfor %}

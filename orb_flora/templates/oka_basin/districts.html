@@ -27,8 +27,8 @@
       <li>
         <h5><a href="{% url 'oka_basin:species' region.name district.name %}">  {% comment %}"{% url 'flora:species' family  genus.name %}">  
           {% endcomment %}
-        {{ district.id }} &dash; {{ district.name }}, 
-      </a> ( {{ district.name_en }} )
+         {{ district.name }} ({{ district.id }} ),</a> 
+          {{ district.name_en }} 
        </h5>
       </li>
       {% if not forloop.last %}
@@ -43,19 +43,20 @@
   {% include "includes/maps_open.html" %}
     {% block region_borders %}
 
-<g>
-  <title>{{ region.name }} область</title>
-      <path 
-      stroke-linecap="square" fill="#ffffff" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
-      vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
-</g>
-      {% for region in region_list %}
+      {% for region_item in region_list %}
         <g>
-        <title>{{ region.name }} область</title>
-        <a href="{% url 'oka_basin:districts' region.name %}">    
+        <title>{{ region_item.name }} область</title>
+        <a href="{% url 'oka_basin:districts' region_item.name %}">    
             <path 
-            stroke-linecap="square" fill="#ffffff" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
-            vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ region.svg_path }} "/>
+            stroke-linecap="square"  fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+            vector-effect="none" fill-rule="evenodd" d=" {{ region_item.svg_path }} "
+              {% if region.name == region_item.name %}
+              
+                fill="gray"
+              {% else  %}
+                fill="lightgray"
+              {% endif %}
+            />
         </a>
         </g>
         {% endfor %}  
@@ -66,8 +67,8 @@
     <title>{{ district.name }} район</title>
     <a href="{% url 'oka_basin:species' region.name district.name %}">    
         <path
-        stroke-linecap="square" fill="#ffffff" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
-        vector-effect="none" fill="#939a9c" fill-rule="evenodd" d=" {{ district.svg_path }} "/>
+        stroke-linecap="square" fill="blue" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+        vector-effect="none"  fill-rule="evenodd" d=" {{ district.svg_path }} "/>
     </a>
     </g>
     {% endfor %}  
