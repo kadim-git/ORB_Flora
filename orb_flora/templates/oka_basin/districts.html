@@ -25,14 +25,13 @@
   <ul>
     {% for district in district_list %}
       <li>
-        <h5><a href="{% url 'oka_basin:species' region.name district.name %}">  {% comment %}"{% url 'flora:species' family  genus.name %}">  
+        <a href="{% url 'oka_basin:species' region.name district.name %}">  {% comment %}"{% url 'flora:species' family  genus.name %}">  
           {% endcomment %}
          {{ district.name }} ({{ district.id }} ),</a> 
           {{ district.name_en }} 
-       </h5>
       </li>
       {% if not forloop.last %}
-        <hr>
+      
       {% endif %}
     {% endfor %}
   </ul>
