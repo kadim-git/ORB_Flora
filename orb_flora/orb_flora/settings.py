@@ -23,15 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-qg0owcebj5$pl6kj^vwqi0a)li6s-&k#t@3(w^=p6_-f=rrq41"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'orbflora.pythonanywhere.com',
     '127.0.0.1',
 ]
-INTERNAL_IPS = [
-    '127.0.0.1',
-] 
+
 
 # Application definition
 
@@ -46,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'debug_toolbar',
+    
 ]
 
 MIDDLEWARE = [
@@ -58,8 +56,17 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    
 ]
+
+if DEBUG:
+    INTERNAL_IPS = [
+        'orbflora.pythonanywhere.com',
+        '127.0.0.1',
+    ]
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware') 
+
 
 ROOT_URLCONF = "orb_flora.urls"
 
