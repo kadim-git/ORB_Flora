@@ -24,3 +24,10 @@ urlpatterns = [
     path('oka_basin/', include('oka_basin.urls')),
 
 ]
+
+# Если проект запущен в режиме разработки...
+from django.conf import settings
+if settings.DEBUG:
+    import debug_toolbar
+    # Добавить к списку urlpatterns список адресов из приложения debug_toolbar:
+    urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),) 

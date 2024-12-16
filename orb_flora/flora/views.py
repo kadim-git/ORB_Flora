@@ -14,7 +14,7 @@ def species_detail(request, family, genus, species):
     template = 'flora/detail.html'
     
     species_info = Species.objects.get(name_short__exact=species)
-    reliability_list = Reliability.objects.filter(species_id__exact=species_info.pk)
+    reliability_list = Reliability.objects.filter(species_id__exact=species_info.pk).select_related('district_id','district_id__region_id')
     location_list = Location.objects.filter(species_id__exact=species_info.pk)
     context = {"family": family, 
                 "genus": genus, 

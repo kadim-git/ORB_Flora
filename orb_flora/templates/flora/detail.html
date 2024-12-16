@@ -43,7 +43,7 @@
     <title>{{ item.district_id.name }} &mdash; {{ item.get_reliability_display }} </title>
     <a href="{% url 'oka_basin:species' item.district_id.region_id.name item.district_id.name %}">    
         <path
-        stroke-linecap="square" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+        stroke-linecap="square" fill-opacity="0.9" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
         vector-effect="none" fill="{{ item.get_reliability_color }}" fill-rule="evenodd" d=" {{ item.district_id.svg_path }}  "/>
     </a>
     </g>

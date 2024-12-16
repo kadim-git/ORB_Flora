@@ -92,7 +92,12 @@ class Species(models.Model):
             for item in reliab4species:
                 index = item.district_id_id
                 relVal = sh1.cell_value(rowx=index, colx=3)
-                item.reliability = relVal if relVal is not '' else 0
+                #item.reliability = relVal if relVal is not '' else 0
+                try:
+                    item.reliability = int(relVal)
+                except:
+                    item.reliability = 0
+
                 item.save()
 
             # from openpyxl import Workbook
@@ -133,7 +138,7 @@ class Reliability(models.Model): #Reliability of Distribution in the district
     reliability = models.IntegerField(choices=RELIABILITY_STATUS, default=0)
 
     def get_reliability_color(self):
-        color_list = ['white','ligthgray','gray','yellow','lightgreen','green']
+        color_list = ['#ffffff','#eeb467','#c5bf5e','#7da115','#3cac28','#146d2b']
         return color_list[self.reliability]
 
 

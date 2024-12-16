@@ -47,8 +47,8 @@
         <title>{{ region_item.name }} область</title>
         <a href="{% url 'oka_basin:districts' region_item.name %}">    
             <path 
-            stroke-linecap="square"  fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
-            vector-effect="none" fill-rule="evenodd" d=" {{ region_item.svg_path }} "
+            stroke-linecap="square"  fill-opacity="0.1" stroke="black"  stroke-width="4" stroke-linejoin="bevel"
+            vector-effect="none"  fill-rule="evenodd" d=" {{ region_item.svg_path }} "
               {% if region.name == region_item.name %}
               
                 fill="gray"
@@ -66,7 +66,7 @@
     <title>{{ district.name }} район</title>
     <a href="{% url 'oka_basin:species' region.name district.name %}">    
         <path
-        stroke-linecap="square" fill="blue" fill-opacity="1" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
+        stroke-linecap="square" fill="brown" fill-opacity="0.6" stroke="black"  stroke-width="2" stroke-linejoin="bevel"
         vector-effect="none"  fill-rule="evenodd" d=" {{ district.svg_path }} "/>
     </a>
     </g>
